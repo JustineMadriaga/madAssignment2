@@ -8,7 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.tuseats.ui.theme.TUSEatsTheme
+import ie.tus.mad.k00271321assignment2.ui.theme.TUSEatsTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,18 +17,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             TUSEatsTheme {
                 val navController = rememberNavController()
-                val mainViewModel: MainViewModel = viewModel()
+                val viewModel: MainViewModel = viewModel()
 
-                NavigationGraph(navController, mainViewModel)
+                NavigationGraph(navController, viewModel)
             }
         }
-    }
-}
-
-fun NavigationGraph(navController: NavHostController, viewModel: MainViewModel) {
-    NavHost(navController = navController, startDestination = "login") {
-        composable("login") { LoginScreen(navController) }
-        composable("home") { HomeScreen(navController) }
-        composable("menu") { MenuScreen(navController, viewModel) }
     }
 }

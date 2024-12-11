@@ -2,8 +2,8 @@ package ie.tus.mad.k00271321assignment2.login
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
-import androidx.compose.material3.TextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,25 +23,16 @@ fun LoginScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextField(
-            value = email.value,
-            onValueChange = { email.value = it },
-            label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth(0.8f)
-        )
+        TextField(value = email.value, onValueChange = { email.value = it }, label = { Text("Email") })
         Spacer(modifier = Modifier.height(16.dp))
         TextField(
             value = password.value,
             onValueChange = { password.value = it },
             label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth(0.8f)
+            visualTransformation = PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(
-            onClick = { navController.navigate("home") }, // Navigate to home on login
-            modifier = Modifier.fillMaxWidth(0.5f)
-        ) {
+        Button(onClick = { navController.navigate("menu") }) {
             Text("Login")
         }
     }
