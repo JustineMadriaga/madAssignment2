@@ -1,47 +1,36 @@
 package ie.tus.mad.k00271321assignment2.login
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
-import ie.tus.mad.k00271321assignment2.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(navController: NavController) {
+fun SignUpScreen(navController: NavController) {
     val auth = FirebaseAuth.getInstance()
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
     Scaffold(
-        containerColor = Color.White // Set the background to white
+        topBar = {
+            TopAppBar(title = { Text("Sign Up") })
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.Top,
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(60.dp))
-            Image(
-                painter = painterResource(id = R.drawable.tuslogoblack),
-                contentDescription = "TUSEats Logo",
-                modifier = Modifier
-                    .width(300.dp)
-                    .height(200.dp)
-            )
-            Spacer(modifier = Modifier.height(70.dp))
             TextField(
                 value = email,
                 onValueChange = { email = it },
@@ -59,12 +48,12 @@ fun LoginScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
-                    auth.signInWithEmailAndPassword(email, password)
+                    auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                // Navigate to home screen
-                                navController.navigate("home") {
-                                    popUpTo("login") { inclusive = true }
+                                // Navigate to login screen
+                                navController.navigate("login") {
+                                    popUpTo("signup") { inclusive = true }
                                 }
                             } else {
                                 errorMessage = task.exception?.message
@@ -73,11 +62,11 @@ fun LoginScreen(navController: NavController) {
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Login")
+                Text("Sign Up")
             }
             Spacer(modifier = Modifier.height(16.dp))
-            TextButton(onClick = { navController.navigate("signup") }) {
-                Text("Don't have an account? Sign up")
+            TextButton(onClick = { navController.navigate("login") }) {
+                Text("Already have an account? Login")
             }
             errorMessage?.let {
                 Spacer(modifier = Modifier.height(8.dp))

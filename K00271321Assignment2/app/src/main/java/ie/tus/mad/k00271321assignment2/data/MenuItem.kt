@@ -5,9 +5,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "menu_items")
 data class MenuItem(
-    @PrimaryKey val id: String,
-    val name: String,
+    @PrimaryKey val id: Int = 0,
+    val type: String = "",
+    val name: String = "",
     val description: String = "",
-    val price: Double,
-    val imageUrl: String = ""
+    val price: String = "",
+    val imageUrl: String = "",
+    val dayOfWeek: String = ""
 )

@@ -10,9 +10,6 @@ interface MenuItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMenuItems(menuItems: List<MenuItem>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMenuItem(menuItem: MenuItem)
-
     @Query("SELECT * FROM menu_items")
     suspend fun getAllMenuItems(): List<MenuItem>
 
